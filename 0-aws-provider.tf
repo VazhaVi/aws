@@ -14,6 +14,18 @@ terraform {
       version = ">= 2.6.0"
     }
   }
+ backend "s3" {
+   bucket         = "bog-terraform-state"
+   key            = "state/terraform.tfstate"
+   region         = "eu-central-1"
+   dynamodb_table = "terraform-state"
+ }  
 
   required_version = "~> 1.0"
+}
+
+module "s3" {
+    source = "./modules/s3"
+    #bucket name should be unique
+    bucket_name = "bog-terraform-state"       
 }
