@@ -16,7 +16,8 @@ terraform {
   }
  backend "s3" {
    bucket         = "bog-terraform-state"
-   key            = "state/terraform.tfstate"
+   encrypt        = true
+   key            = "terraform.tfstate"
    region         = "eu-central-1"
    dynamodb_table = "terraform-state"
  }  
@@ -27,5 +28,6 @@ terraform {
 module "s3" {
     source = "./modules/s3"
     #bucket name should be unique
-    bucket_name = "bog-terraform-state"       
+    bucket_name = "bog-terraform-state"     
+    tf_dynamo_db_name = "terraform-state"  
 }
