@@ -3,6 +3,7 @@ resource "aws_grafana_workspace" "example" {
   authentication_providers = ["SAML"]
   permission_type          = "SERVICE_MANAGED"
   role_arn                 = aws_iam_role.assume.arn
+  name                     = "lab-grafana"
 }
 
 resource "aws_iam_role" "assume" {
